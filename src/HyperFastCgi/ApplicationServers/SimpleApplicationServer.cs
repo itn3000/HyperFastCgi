@@ -78,6 +78,10 @@ namespace HyperFastCgi.ApplicationServers
 
 		private bool Match (IApplicationHost apphost, string vhost, int vport, string vpath)
 		{
+			if(apphost == null)
+			{
+				throw new Exception(string.Format("apphost is null(vhost={0},vport={1},vpath={2})",vhost,vport,vpath));
+			}
 			if (vport != -1 && apphost.VPort != -1 && vport != apphost.VPort)
 				return false;
 
@@ -102,8 +106,8 @@ namespace HyperFastCgi.ApplicationServers
 //				}
 //			}
 
-			int local = vpath.Length;
-			int vlength = apphost.VPath.Length;
+			int local = vpath == null ? 0 : vpath.Length;
+			int vlength = apphost.VPath == null ? 0 : apphost.VPath.Length;
 			if (vlength > local) {
 				// Check for /xxx requests to be redirected to /xxx/
 				if (apphost.VPath [vlength - 1] != '/')
