@@ -102,8 +102,8 @@ namespace HyperFastCgi.ApplicationServers
 //				}
 //			}
 
-			int local = vpath.Length;
-			int vlength = apphost.VPath.Length;
+			int local = vpath == null ? 0 : vpath.Length;
+			int vlength = apphost.VPath == null ? 0 : apphost.VPath.Length;
 			if (vlength > local) {
 				// Check for /xxx requests to be redirected to /xxx/
 				if (apphost.VPath [vlength - 1] != '/')

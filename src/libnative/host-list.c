@@ -88,6 +88,9 @@ find_host_by_path (gchar* vhost, int vport, gchar* vpath)
 static gboolean
 match_host (HostInfo *host, gchar *vhost, int vport, gchar *vpath)
 {
+    gchar emptystr[1] = "";
+    vhost = vhost != NULL ? vhost : emptystr;
+    vpath = vpath != NULL ? vpath : emptystr;
     //check matching the port.
     if (host->vport != PORTS_ALL && host->vport != vport)
         return FALSE;
